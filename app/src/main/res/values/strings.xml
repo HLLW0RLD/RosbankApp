@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RosbankApp</string>
+    <string name="new_task">новая задача</string>
+    <string name="task_list">список задач</string>
+    <string name="main_title">Информация о текущей задаче</string>
+    <string name="search">Поиск...</string>
+    <string name="search_title">Введите имя</string>
+</resources>
