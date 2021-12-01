@@ -4,54 +4,51 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rosbankapp.R
-import com.example.rosbankapp.model.Employer
-import com.example.rosbankapp.model.repository.EmployerRepository
+import com.example.rosbankapp.model.Task
+import com.example.rosbankapp.model.repository.TaskRepository
 import com.example.rosbankapp.view.EmployerFragment
-import com.example.rosbankapp.view.EmployerFragment.Companion.NAME_BUNDLE
-import com.example.rosbankapp.view.adapter.NameAdapter
+import com.example.rosbankapp.view.adapter.TaskAdapter
 
-class NameSearchFragment : Fragment() {
+class TaskSearchFragment : Fragment() {
 
     companion object{
-        fun newInstance() = NameSearchFragment()
+        fun newInstance() = TaskSearchFragment()
     }
 
-    interface onNameClick{
-        fun onNameClick(employer: Employer)
+    interface onTaskClick{
+        fun onTaskClick(task: Task)
     }
 
-    var employerRepository = EmployerRepository()
+    var taskRepository = TaskRepository()
 
-    var employers : MutableList<Employer> = employerRepository.getEmployers()
+    var tasks : MutableList<Task> = taskRepository.getTasks()
 
-    val adapter = NameAdapter()
+    val adapter = TaskAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_name_search, container, false)
+        return inflater.inflate(R.layout.fragment_task_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.name_list)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.task_list)
 
         recyclerView.adapter = adapter
 
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        adapter.setNameClickListener(onNameClickListener)
+        adapter.setTaskClickListener(onTaskClickListener)
 
-        val searchView = view.findViewById<androidx.appcompat.widget.SearchView>(R.id.search_name)
+        val searchView = view.findViewById<androidx.appcompat.widget.SearchView>(R.id.search_task)
 
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -70,19 +67,19 @@ class NameSearchFragment : Fragment() {
     }
 
     fun filter(newText : String){
-        var filteredList : MutableList<Employer> = mutableListOf()
+        var filteredList : MutableList<Task> = mutableListOf()
 
-        for(item in employers){
-            if(item.name.toLowerCase().contains(newText.toLowerCase()))
+        for(item in tasks){
+            if(item.nameTask.toLowerCase().contains(newText.toLowerCase()))
                 filteredList.add(item)
         }
         adapter.filterList(filteredList)
     }
 
-    private val onNameClickListener = object : onNameClick{
-        override fun onNameClick(employer: Employer){
+    private val onTaskClickListener = object : onTaskClick{
+        override fun onTaskClick(task: Task){
             val bundle = Bundle()
-            bundle.putParcelable(NAME_BUNDLE, employer)
+            bundle.putParcelable(EmployerFragment.TASK_BUNDLE, task)
             parentFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, EmployerFragment.newInstance(bundle))

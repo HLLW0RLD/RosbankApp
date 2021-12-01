@@ -12,6 +12,7 @@ import com.example.rosbankapp.model.Employer
 import com.example.rosbankapp.model.Task
 import com.example.rosbankapp.model.repository.TaskRepository
 import com.example.rosbankapp.view.search.NameSearchFragment
+import com.example.rosbankapp.view.search.TaskSearchFragment
 
 class EmployerFragment : Fragment() {
 
@@ -19,14 +20,21 @@ class EmployerFragment : Fragment() {
 
         const val NAME_BUNDLE = "NAME_BUNDLE"
 
+        const val TASK_BUNDLE = "TASK_BUNDLE"
+
+        fun newInstance(bundle: Bundle) : EmployerFragment{
+            val fragment = EmployerFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+
         fun newInstance() = EmployerFragment()
     }
 
     var taskRepository = TaskRepository()
 
     var tasks : MutableList<Task> = taskRepository.getTasks()
-    
-    lateinit var dialog: Dialog
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,9 +49,15 @@ class EmployerFragment : Fragment() {
 
         var name = view.findViewById<TextView>(R.id.name)
 
-        val result = arguments?.getParcelable<Employer>("NAME_BUNDLE")
+        val resultName = arguments?.getParcelable<Employer>("NAME_BUNDLE")
 
-        name.text = result?.name
+        name.text = resultName?.name
+
+        var task = view.findViewById<TextView>(R.id.task)
+
+        val resultTask = arguments?.getParcelable<Task>("TASK_BUNDLE")
+
+        task.text = resultTask?.nameTask
 
         name.setOnClickListener {
 
@@ -51,6 +65,15 @@ class EmployerFragment : Fragment() {
                 .beginTransaction()
                 .replace(R.id.container, NameSearchFragment.newInstance())
                 .addToBackStack(NameSearchFragment.toString())
+                .commit()
+        }
+
+        task.setOnClickListener {
+
+            parentFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, TaskSearchFragment.newInstance())
+                .addToBackStack(TaskSearchFragment.toString())
                 .commit()
         }
     }
