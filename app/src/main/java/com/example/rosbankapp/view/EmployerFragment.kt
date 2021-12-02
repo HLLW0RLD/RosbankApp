@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.rosbankapp.R
 import com.example.rosbankapp.model.Employer
 import com.example.rosbankapp.model.Task
 import com.example.rosbankapp.model.repository.TaskRepository
 import com.example.rosbankapp.view.search.NameSearchFragment
 import com.example.rosbankapp.view.search.TaskSearchFragment
+import com.example.rosbankapp.viewmodel.EmployerViewModel
+import kotlinx.android.synthetic.main.fragment_employer.*
 
 class EmployerFragment : Fragment() {
 
@@ -31,9 +34,9 @@ class EmployerFragment : Fragment() {
         fun newInstance() = EmployerFragment()
     }
 
-    var taskRepository = TaskRepository()
-
-    var tasks : MutableList<Task> = taskRepository.getTasks()
+    val viewModelEmployer : EmployerViewModel by lazy {
+        ViewModelProvider(this).get(EmployerViewModel::class.java)
+    }
 
 
     override fun onCreateView(
@@ -49,15 +52,13 @@ class EmployerFragment : Fragment() {
 
         var name = view.findViewById<TextView>(R.id.name)
 
-        val resultName = arguments?.getParcelable<Employer>("NAME_BUNDLE")
-
-        name.text = resultName?.name
-
         var task = view.findViewById<TextView>(R.id.task)
 
-        val resultTask = arguments?.getParcelable<Task>("TASK_BUNDLE")
+        arguments?.getParcelable<Employer>("NAME_BUNDLE")?.let { viewModelEmployer.getEmployee(it) }
 
-        task.text = resultTask?.nameTask
+        arguments?.getParcelable<Task>("TASK_BUNDLE")
+
+        viewModelEmployer.getLiveData().observe(viewLifecycleOwner, {showNameInfo(it)})
 
         name.setOnClickListener {
 
@@ -76,5 +77,10 @@ class EmployerFragment : Fragment() {
                 .addToBackStack(TaskSearchFragment.toString())
                 .commit()
         }
+    }
+
+    fun showNameInfo(employer: Employer){
+
+        name.text = employer.name
     }
 }

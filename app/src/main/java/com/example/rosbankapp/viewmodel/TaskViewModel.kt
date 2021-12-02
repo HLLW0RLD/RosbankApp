@@ -1,4 +1,6 @@
 package com.example.rosbankapp.viewmodel
 
-class TaskViewModel {
+import androidx.lifecycle.ViewModel
+
+class TaskViewModel : ViewModel() {
 }
