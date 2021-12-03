@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rosbankapp.R
 import com.example.rosbankapp.model.Task
 import com.example.rosbankapp.model.repository.TaskRepository
-import com.example.rosbankapp.view.EmployerFragment
+import com.example.rosbankapp.view.EmployeeFragment
 import com.example.rosbankapp.view.adapter.TaskAdapter
 
 class TaskSearchFragment : Fragment() {
@@ -79,11 +79,11 @@ class TaskSearchFragment : Fragment() {
     private val onTaskClickListener = object : onTaskClick{
         override fun onTaskClick(task: Task){
             val bundle = Bundle()
-            bundle.putParcelable(EmployerFragment.TASK_BUNDLE, task)
+            bundle.putParcelable(EmployeeFragment.TASK_BUNDLE, task)
             parentFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, EmployerFragment.newInstance(bundle))
-                .addToBackStack(EmployerFragment.toString())
+                .replace(R.id.container, EmployeeFragment.newInstance(bundle))
+                .addToBackStack(EmployeeFragment.toString())
                 .commit()
 
         }

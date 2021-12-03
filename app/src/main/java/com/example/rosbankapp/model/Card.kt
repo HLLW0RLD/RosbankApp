@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Task (
+data class Card(
     val id : Int,
-    val nameTask : String
-    ) : Parcelable
+    val employee : String,
+    val task: String
+) : Parcelable

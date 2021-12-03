@@ -2,13 +2,8 @@ package com.example.rosbankapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import com.example.rosbankapp.R
-import com.example.rosbankapp.model.Employer
-import com.example.rosbankapp.model.Task
-import com.example.rosbankapp.model.repository.TaskRepository
-import com.example.rosbankapp.view.EmployerFragment.Companion.NAME_BUNDLE
-import com.example.rosbankapp.view.search.NameSearchFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,11 +11,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, EmployerFragment.newInstance())
+                .replace(R.id.container, EmployeeFragment.newInstance())
                 .commitNow()
+        }
+
+        bottom_menu.also { bottomNavigation ->
+            bottomNavigation.setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.main_screen -> {
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, EmployeeFragment.newInstance())
+                            .commitNow()
+                    }
+
+                    R.id.task_list -> {
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, ListFragment.newInstance())
+                            .commitNow()
+                    }
+                }
+                true
+            }
         }
     }
 }

@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rosbankapp.R
-import com.example.rosbankapp.model.Employer
-import com.example.rosbankapp.model.repository.EmployerRepository
-import com.example.rosbankapp.view.EmployerFragment
-import com.example.rosbankapp.view.EmployerFragment.Companion.NAME_BUNDLE
+import com.example.rosbankapp.model.Employee
+import com.example.rosbankapp.model.repository.EmployeeRepository
+import com.example.rosbankapp.view.EmployeeFragment
+import com.example.rosbankapp.view.EmployeeFragment.Companion.NAME_BUNDLE
 import com.example.rosbankapp.view.adapter.NameAdapter
 
 class NameSearchFragment : Fragment() {
@@ -23,12 +21,12 @@ class NameSearchFragment : Fragment() {
     }
 
     interface onNameClick{
-        fun onNameClick(employer: Employer)
+        fun onNameClick(employer: Employee)
     }
 
-    var employerRepository = EmployerRepository()
+    var employerRepository = EmployeeRepository()
 
-    var employers : MutableList<Employer> = employerRepository.getEmployers()
+    var employers : MutableList<Employee> = employerRepository.getEmployees()
 
     val adapter = NameAdapter()
 
@@ -70,7 +68,7 @@ class NameSearchFragment : Fragment() {
     }
 
     fun filter(newText : String){
-        var filteredList : MutableList<Employer> = mutableListOf()
+        var filteredList : MutableList<Employee> = mutableListOf()
 
         for(item in employers){
             if(item.name.toLowerCase().contains(newText.toLowerCase()))
@@ -80,13 +78,13 @@ class NameSearchFragment : Fragment() {
     }
 
     private val onNameClickListener = object : onNameClick{
-        override fun onNameClick(employer: Employer){
+        override fun onNameClick(employer: Employee){
             val bundle = Bundle()
             bundle.putParcelable(NAME_BUNDLE, employer)
             parentFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, EmployerFragment.newInstance(bundle))
-                .addToBackStack(EmployerFragment.toString())
+                .replace(R.id.container, EmployeeFragment.newInstance(bundle))
+                .addToBackStack(EmployeeFragment.toString())
                 .commit()
 
         }

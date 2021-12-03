@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rosbankapp.R
-import com.example.rosbankapp.model.Employer
-import com.example.rosbankapp.view.EmployerFragment
+import com.example.rosbankapp.model.Employee
 import com.example.rosbankapp.view.search.NameSearchFragment
 
 class NameAdapter : RecyclerView.Adapter<NameAdapter.MainViewHolder>() {
 
-    private var nameList : List<Employer> = listOf()
+    private var nameList : List<Employee> = listOf()
 
     private var clickedName: NameSearchFragment.onNameClick? = null
 
@@ -25,7 +24,7 @@ class NameAdapter : RecyclerView.Adapter<NameAdapter.MainViewHolder>() {
 
         private var name = itemView.findViewById<TextView>(R.id.card_name)
 
-            fun bind(employer: Employer){
+            fun bind(employer: Employee){
 
                 name.text = employer.name
 
@@ -46,7 +45,7 @@ class NameAdapter : RecyclerView.Adapter<NameAdapter.MainViewHolder>() {
         return nameList.size
     }
 
-    fun filterList(filteredList : MutableList<Employer>){
+    fun filterList(filteredList : MutableList<Employee>){
         nameList = filteredList
         notifyDataSetChanged()
     }
