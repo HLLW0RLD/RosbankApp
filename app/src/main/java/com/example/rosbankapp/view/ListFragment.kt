@@ -10,17 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rosbankapp.R
 import com.example.rosbankapp.model.Card
-import com.example.rosbankapp.model.Employee
-import com.example.rosbankapp.model.Task
 import com.example.rosbankapp.model.repository.CardRepository
-import com.example.rosbankapp.model.repository.TaskRepository
 import com.example.rosbankapp.view.adapter.ListAdapter
-import com.example.rosbankapp.view.adapter.NameAdapter
-import com.example.rosbankapp.view.search.NameSearchFragment
 import com.example.rosbankapp.viewmodel.CardViewModel
-import com.example.rosbankapp.viewmodel.TaskViewModel
 import com.example.rosbankapp.viewmodel.factory.CardViewModelFactory
-import com.example.rosbankapp.viewmodel.factory.TaskViewModelFactory
 
 class ListFragment : Fragment() {
 
@@ -73,7 +66,5 @@ class ListFragment : Fragment() {
         viewModel.getCard(card)
 
         adapter.add(card)
-
-        adapter.notifyDataSetChanged()
     }
 }

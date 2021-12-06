@@ -5,11 +5,11 @@ import com.example.rosbankapp.model.Task
 class TaskRepository {
 
     var taskList : MutableList<Task> = mutableListOf(
-        Task(1, "Задача1"),
-        Task(2, "Задача2"),
-        Task(3, "Задача3"),
-        Task(4, "Задача4"),
-        Task(5, "Задача5")
+        Task(0, "Задача1"),
+        Task(1, "Задача2"),
+        Task(2, "Задача3"),
+        Task(3, "Задача4"),
+        Task(4, "Задача5")
     )
 
     fun getTasks(): MutableList<Task> {

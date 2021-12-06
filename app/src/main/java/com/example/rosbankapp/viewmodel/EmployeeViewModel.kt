@@ -13,8 +13,8 @@ class EmployeeViewModel(private val repository : EmployeeRepository) : ViewModel
 
     fun getLiveData() = employeeLiveData
 
-    fun getEmployee(employer: Employee){
-        val result = repository.getEmployee(employer.id)
+    fun getEmployee(employee: Employee){
+        val result = repository.getEmployee(employee.id)
 
         employeeLiveData.value = result
     }

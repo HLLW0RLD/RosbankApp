@@ -13,6 +13,7 @@ import com.example.rosbankapp.model.Employee
 import com.example.rosbankapp.model.Task
 import com.example.rosbankapp.model.repository.EmployeeRepository
 import com.example.rosbankapp.model.repository.TaskRepository
+import com.example.rosbankapp.view.adapter.ListAdapter
 import com.example.rosbankapp.view.search.NameSearchFragment
 import com.example.rosbankapp.view.search.TaskSearchFragment
 import com.example.rosbankapp.viewmodel.EmployeeViewModel
@@ -41,12 +42,11 @@ class EmployeeFragment : Fragment() {
         fun newInstance() = EmployeeFragment()
     }
 
-    var cards : MutableList<Card> = mutableListOf()
-
     val viewModelEmployee : EmployeeViewModel by activityViewModels { EmployeeViewModelFactory(EmployeeRepository()) }
 
     val viewModelTask : TaskViewModel by activityViewModels { TaskViewModelFactory(TaskRepository()) }
 
+    var cards : MutableList<Card> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,7 +87,7 @@ class EmployeeFragment : Fragment() {
 
         add_card.setOnClickListener {
 
-            val newId = cards.size
+            val newId = cards.size + 1
 
             val card = Card(newId, name.text.toString(), task.text.toString())
             val bundle = Bundle()

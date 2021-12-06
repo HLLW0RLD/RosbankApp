@@ -21,6 +21,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MainViewHolder>() {
 
     fun add(addedCard: Card){
         cardList.add(addedCard)
+        notifyItemInserted(cardList.size - 1)
     }
 
     inner class MainViewHolder(itemView: View)

@@ -5,11 +5,11 @@ import com.example.rosbankapp.model.Employee
 class EmployeeRepository {
 
     var employerList : MutableList<Employee> = mutableListOf(
-        Employee(1,"Иванов Андрей Петрович"),
-        Employee(2,"Николаев Петр Олегович"),
-        Employee(3,"Сидоров Иван Сергеевич"),
-        Employee(4,"Петров Игорь Николаевич"),
-        Employee(5,"Сорокин Григорий Дмитриевич")
+        Employee(0,"Иванов Андрей Петрович"),
+        Employee(1,"Николаев Петр Олегович"),
+        Employee(2,"Сидоров Иван Сергеевич"),
+        Employee(3,"Петров Игорь Николаевич"),
+        Employee(4,"Сорокин Григорий Дмитриевич")
     )
 
     fun getEmployees(): MutableList<Employee> {
