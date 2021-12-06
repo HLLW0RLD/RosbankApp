@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -58,6 +63,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"/>
 
+    <TextView
+        android:id="@+id/date"
+        android:hint="Период выполнения"
+        android:textColorHint="@color/text_color"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_gravity="top"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"/>
+
+    <EditText
+        android:id="@+id/hours"
+        android:hint="Затраченные часы"
+        android:textColorHint="@color/text_color"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_gravity="top"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@android:drawable/arrow_down_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_card"
         android:layout_width="286dp"
@@ -69,3 +104,4 @@
 
 
 </LinearLayout>
+</androidx.core.widget.NestedScrollView>

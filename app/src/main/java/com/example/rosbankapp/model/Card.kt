@@ -5,7 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Card(
-    val id : Int,
-    val employee : String,
-    val task: String
+    val id: Int,
+    val employee: String,
+    val task: String,
+    val date: String,
+    val hours: String
 ) : Parcelable

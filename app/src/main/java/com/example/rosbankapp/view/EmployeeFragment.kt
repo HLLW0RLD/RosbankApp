@@ -1,10 +1,13 @@
 package com.example.rosbankapp.view
 
+import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.rosbankapp.R
@@ -25,7 +28,7 @@ import java.util.*
 
 class EmployeeFragment : Fragment() {
 
-    companion object{
+    companion object {
 
         const val NAME_BUNDLE = "NAME_BUNDLE"
 
@@ -33,7 +36,7 @@ class EmployeeFragment : Fragment() {
 
         const val CARD_BUNDLE = "CARD_BUNDLE"
 
-        fun newInstance(bundle: Bundle) : EmployeeFragment{
+        fun newInstance(bundle: Bundle): EmployeeFragment {
             val fragment = EmployeeFragment()
             fragment.arguments = bundle
             return fragment
@@ -42,11 +45,23 @@ class EmployeeFragment : Fragment() {
         fun newInstance() = EmployeeFragment()
     }
 
-    val viewModelEmployee : EmployeeViewModel by activityViewModels { EmployeeViewModelFactory(EmployeeRepository()) }
+    val viewModelEmployee: EmployeeViewModel by activityViewModels {
+        EmployeeViewModelFactory(
+            EmployeeRepository()
+        )
+    }
 
-    val viewModelTask : TaskViewModel by activityViewModels { TaskViewModelFactory(TaskRepository()) }
+    val viewModelTask: TaskViewModel by activityViewModels { TaskViewModelFactory(TaskRepository()) }
 
-    var cards : MutableList<Card> = mutableListOf()
+    var cards: MutableList<Card> = mutableListOf()
+
+    val c = Calendar.getInstance()
+
+    val year = c.get(Calendar.YEAR)
+
+    val month = c.get(Calendar.MONTH)
+
+    val day = c.get(Calendar.DAY_OF_MONTH)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +71,7 @@ class EmployeeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_employee, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,9 +79,9 @@ class EmployeeFragment : Fragment() {
 
         arguments?.getParcelable<Task>("TASK_BUNDLE")?.let { viewModelTask.getTask(it) }
 
-        viewModelEmployee.getLiveData().observe(viewLifecycleOwner, {showNameInfo(it)})
+        viewModelEmployee.getLiveData().observe(viewLifecycleOwner, { showNameInfo(it) })
 
-        viewModelTask.getLiveData().observe(viewLifecycleOwner, {showTaskInfo(it)})
+        viewModelTask.getLiveData().observe(viewLifecycleOwner, { showTaskInfo(it) })
 
         name.setOnClickListener {
 
@@ -89,23 +105,45 @@ class EmployeeFragment : Fragment() {
 
             val newId = cards.size + 1
 
-            val card = Card(newId, name.text.toString(), task.text.toString())
-            val bundle = Bundle()
-            bundle.putParcelable(CARD_BUNDLE, card)
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, ListFragment.newInstance(bundle))
-                .addToBackStack(ListFragment.toString())
-                .commit()
+            val card = Card(
+                newId,
+                name.text.toString(),
+                task.text.toString(),
+                date.text.toString(),
+                hours.text.toString()
+            )
+
+            if (name != null && task != null && date != null && hours != null) {
+
+                val bundle = Bundle()
+                bundle.putParcelable(CARD_BUNDLE, card)
+                parentFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, ListFragment.newInstance(bundle))
+                    .addToBackStack(ListFragment.toString())
+                    .commit()
+            } else {
+                Toast.makeText(requireContext(), "Вы не заполнили все поля", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        date.setOnClickListener {
+            val dpd = DatePickerDialog(
+                requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                    date.text = "" + day + "/" + month + "/" + year
+                }, year, month, day)
+            dpd.show()
         }
     }
 
-    fun showNameInfo(employer: Employee){
+
+    fun showNameInfo(employer: Employee) {
 
         name.text = employer.name
     }
 
-    fun showTaskInfo(nameTask : Task){
+    fun showTaskInfo(nameTask: Task) {
 
         task.text = nameTask.nameTask
     }
