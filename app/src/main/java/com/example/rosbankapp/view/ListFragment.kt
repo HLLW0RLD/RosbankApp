@@ -55,8 +55,6 @@ class ListFragment : Fragment() {
 
         arguments?.getParcelable<Card>("CARD_BUNDLE")?.let {fillAdapter(it)}
 
-        viewModel.getCards()
-
         viewModel.getListLiveData().observe(viewLifecycleOwner, {adapter.setData(it)})
 
     }

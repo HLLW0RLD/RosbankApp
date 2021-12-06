@@ -113,7 +113,7 @@ class EmployeeFragment : Fragment() {
                 hours.text.toString()
             )
 
-            if (name != null && task != null && date != null && hours != null) {
+            if (name != null || task != null || date != null || hours != null) {
 
                 val bundle = Bundle()
                 bundle.putParcelable(CARD_BUNDLE, card)
