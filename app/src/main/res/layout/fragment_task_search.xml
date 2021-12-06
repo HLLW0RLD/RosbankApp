@@ -9,11 +9,15 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_task"
+        android:layout_gravity="top"
+        android:layout_margin="@dimen/default_margin"
+        android:background="@color/toolbar_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_list"
+        android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/default_margin"

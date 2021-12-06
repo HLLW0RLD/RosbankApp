@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
+        android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
         android:text="@string/main_title"
+        android:textColor="@color/text_color"
         android:textSize="@dimen/main_title_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,6 +22,7 @@
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
+        android:layout_gravity="top"
         android:layout_height="2dp"
         android:layout_margin="@dimen/default_margin"
         android:background="@color/toolbar_color"
@@ -26,6 +31,9 @@
     <TextView
         android:id="@+id/name"
         android:hint="Имя работника"
+        android:textColor="@color/black"
+        android:textColorHint="@color/text_color"
+        android:layout_gravity="top"
         android:textSize="@dimen/default_text_size"
         android:layout_margin="@dimen/default_margin"
         android:layout_width="match_parent"
@@ -37,8 +45,11 @@
 
     <TextView
         android:id="@+id/task"
-        android:hint="Выберите задачу"
+        android:hint="Название договора"
+        android:textColorHint="@color/text_color"
         android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_gravity="top"
         android:layout_margin="@dimen/default_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,13 +60,12 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_card"
-        android:layout_width="wrap_content"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/default_margin"
         android:backgroundTint="@color/toolbar_color"
-        android:src="@drawable/ic_baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:src="@drawable/ic_baseline_add_24" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

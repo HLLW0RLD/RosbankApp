@@ -60,9 +60,9 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        adapter.setData(cards)
-
         arguments?.getParcelable<Card>("CARD_BUNDLE")?.let {fillAdapter(it)}
+
+        viewModel.getCards()
 
         viewModel.getListLiveData().observe(viewLifecycleOwner, {adapter.setData(it)})
 
@@ -70,7 +70,9 @@ class ListFragment : Fragment() {
 
     fun fillAdapter(card: Card){
 
-        adapter.add(card!!)
+        viewModel.getCard(card)
+
+        adapter.add(card)
 
         adapter.notifyDataSetChanged()
     }

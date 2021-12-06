@@ -71,7 +71,7 @@ class NameSearchFragment : Fragment() {
         var filteredList : MutableList<Employee> = mutableListOf()
 
         for(item in employers){
-            if(item.name.toLowerCase().contains(newText.toLowerCase()))
+            if(item.name.contains(newText))
                 filteredList.add(item)
         }
         adapter.filterList(filteredList)
