@@ -8,6 +8,7 @@ data class Card(
     val id: Int,
     val employee: String,
     val task: String,
-    val date: String,
+    val beginning: String,
+    val ending : String,
     val hours: String
 ) : Parcelable

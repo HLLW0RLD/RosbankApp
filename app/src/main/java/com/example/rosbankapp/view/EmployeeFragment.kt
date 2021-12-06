@@ -109,11 +109,12 @@ class EmployeeFragment : Fragment() {
                 newId,
                 name.text.toString(),
                 task.text.toString(),
-                date.text.toString(),
+                beginning.text.toString(),
+                ending.text.toString(),
                 hours.text.toString()
             )
 
-            if (name != null || task != null || date != null || hours != null) {
+            if (name != null || task != null || beginning != null  || ending != null || hours != null) {
 
                 val bundle = Bundle()
                 bundle.putParcelable(CARD_BUNDLE, card)
@@ -128,10 +129,18 @@ class EmployeeFragment : Fragment() {
             }
         }
 
-        date.setOnClickListener {
+        beginning.setOnClickListener {
             val dpd = DatePickerDialog(
                 requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, day ->
-                    date.text = "" + day + "/" + month + "/" + year
+                    beginning.text = "" + day + "/" + month + "/" + year
+                }, year, month, day)
+            dpd.show()
+        }
+
+        ending.setOnClickListener {
+            val dpd = DatePickerDialog(
+                requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                    ending.text = "" + day + "/" + month + "/" + year
                 }, year, month, day)
             dpd.show()
         }
