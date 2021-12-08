@@ -1,5 +1,6 @@
 package com.example.rosbankapp.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,7 @@ class ListFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(bundle: Bundle) : ListFragment{
+        fun newInstance(bundle: Bundle): ListFragment {
             val fragment = ListFragment()
             fragment.arguments = bundle
             return fragment
@@ -29,11 +30,9 @@ class ListFragment : Fragment() {
 
     }
 
-    val viewModel : CardViewModel by activityViewModels { CardViewModelFactory(CardRepository()) }
+    val viewModel: CardViewModel by activityViewModels { CardViewModelFactory(CardRepository()) }
 
     val adapter = ListAdapter()
-
-    var cards : MutableList<Card> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,16 +52,18 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        arguments?.getParcelable<Card>("CARD_BUNDLE")?.let {fillAdapter(it)}
+        arguments?.getParcelable<Card>("CARD_BUNDLE")?.let { newCardAdder(it)}
 
-        viewModel.getListLiveData().observe(viewLifecycleOwner, {adapter.setData(it)})
+        viewModel.getLiveData().observe(viewLifecycleOwner, { adapter.setData(it) })
+
+        viewModel.getCards()
 
     }
 
-    fun fillAdapter(card: Card){
-
-        viewModel.getCard(card)
+    fun newCardAdder(card: Card){
+        viewModel.addCard(card)
 
         adapter.add(card)
+
     }
 }

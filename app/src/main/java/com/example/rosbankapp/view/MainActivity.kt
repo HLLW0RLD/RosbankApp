@@ -3,6 +3,7 @@ package com.example.rosbankapp.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.rosbankapp.R
+import com.example.rosbankapp.model.Card
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -10,6 +11,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val bundle = savedInstanceState?.getParcelable<Card>("CARD_BUNDLE")
 
         if (savedInstanceState == null) {
             supportFragmentManager

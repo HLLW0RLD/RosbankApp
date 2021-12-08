@@ -11,7 +11,7 @@ import com.example.rosbankapp.view.search.TaskSearchFragment
 
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MainViewHolder>() {
 
-    private var taskList : List<Task> = listOf()
+    private var taskList: List<Task> = listOf()
 
     private var clickedTask: TaskSearchFragment.onTaskClick? = null
 
@@ -19,12 +19,11 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MainViewHolder>() {
         this.clickedTask = click
     }
 
-    inner class MainViewHolder(itemView: View)
-        : RecyclerView.ViewHolder(itemView) {
+    inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var name = itemView.findViewById<TextView>(R.id.card_name)
 
-        fun bind(task: Task){
+        fun bind(task: Task) {
 
             name.text = task.nameTask
 
@@ -33,7 +32,8 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MainViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val itemView : View = LayoutInflater.from(parent.context).inflate(R.layout.item_name, parent, false)
+        val itemView: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_name, parent, false)
         return MainViewHolder(itemView)
     }
 
@@ -45,11 +45,10 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.MainViewHolder>() {
         return taskList.size
     }
 
-    fun filterList(filteredList : MutableList<Task>){
+    fun filterList(filteredList: MutableList<Task>) {
         taskList = filteredList
         notifyDataSetChanged()
     }
-
 
 
 }

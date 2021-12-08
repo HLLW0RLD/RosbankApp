@@ -15,17 +15,17 @@ import com.example.rosbankapp.view.adapter.TaskAdapter
 
 class TaskSearchFragment : Fragment() {
 
-    companion object{
+    companion object {
         fun newInstance() = TaskSearchFragment()
     }
 
-    interface onTaskClick{
+    interface onTaskClick {
         fun onTaskClick(task: Task)
     }
 
     var taskRepository = TaskRepository()
 
-    var tasks : MutableList<Task> = taskRepository.getTasks()
+    var tasks: MutableList<Task> = taskRepository.getTasks()
 
     val adapter = TaskAdapter()
 
@@ -44,13 +44,15 @@ class TaskSearchFragment : Fragment() {
 
         recyclerView.adapter = adapter
 
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         adapter.setTaskClickListener(onTaskClickListener)
 
         val searchView = view.findViewById<androidx.appcompat.widget.SearchView>(R.id.search_task)
 
-        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
@@ -66,18 +68,18 @@ class TaskSearchFragment : Fragment() {
         })
     }
 
-    fun filter(newText : String){
-        var filteredList : MutableList<Task> = mutableListOf()
+    fun filter(newText: String) {
+        var filteredList: MutableList<Task> = mutableListOf()
 
-        for(item in tasks){
-            if(item.nameTask.toLowerCase().contains(newText.toLowerCase()))
+        for (item in tasks) {
+            if (item.nameTask.toLowerCase().contains(newText.toLowerCase()))
                 filteredList.add(item)
         }
         adapter.filterList(filteredList)
     }
 
-    private val onTaskClickListener = object : onTaskClick{
-        override fun onTaskClick(task: Task){
+    private val onTaskClickListener = object : onTaskClick {
+        override fun onTaskClick(task: Task) {
             val bundle = Bundle()
             bundle.putParcelable(EmployeeFragment.TASK_BUNDLE, task)
             parentFragmentManager

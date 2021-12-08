@@ -16,17 +16,17 @@ import com.example.rosbankapp.view.adapter.NameAdapter
 
 class NameSearchFragment : Fragment() {
 
-    companion object{
+    companion object {
         fun newInstance() = NameSearchFragment()
     }
 
-    interface onNameClick{
+    interface onNameClick {
         fun onNameClick(employer: Employee)
     }
 
     var employerRepository = EmployeeRepository()
 
-    var employers : MutableList<Employee> = employerRepository.getEmployees()
+    var employers: MutableList<Employee> = employerRepository.getEmployees()
 
     val adapter = NameAdapter()
 
@@ -45,13 +45,15 @@ class NameSearchFragment : Fragment() {
 
         recyclerView.adapter = adapter
 
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         adapter.setNameClickListener(onNameClickListener)
 
         val searchView = view.findViewById<androidx.appcompat.widget.SearchView>(R.id.search_name)
 
-        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
@@ -67,18 +69,18 @@ class NameSearchFragment : Fragment() {
         })
     }
 
-    fun filter(newText : String){
-        var filteredList : MutableList<Employee> = mutableListOf()
+    fun filter(newText: String) {
+        var filteredList: MutableList<Employee> = mutableListOf()
 
-        for(item in employers){
-            if(item.name.contains(newText))
+        for (item in employers) {
+            if (item.name.toLowerCase().contains(newText.toLowerCase()))
                 filteredList.add(item)
         }
         adapter.filterList(filteredList)
     }
 
-    private val onNameClickListener = object : onNameClick{
-        override fun onNameClick(employer: Employee){
+    private val onNameClickListener = object : onNameClick {
+        override fun onNameClick(employer: Employee) {
             val bundle = Bundle()
             bundle.putParcelable(NAME_BUNDLE, employer)
             parentFragmentManager

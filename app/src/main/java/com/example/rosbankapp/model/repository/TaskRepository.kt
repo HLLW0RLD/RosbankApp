@@ -4,7 +4,7 @@ import com.example.rosbankapp.model.Task
 
 class TaskRepository {
 
-    var taskList : MutableList<Task> = mutableListOf(
+    var taskList: MutableList<Task> = mutableListOf(
         Task(0, "Задача1"),
         Task(1, "Задача2"),
         Task(2, "Задача3"),
@@ -16,7 +16,7 @@ class TaskRepository {
         return taskList
     }
 
-    fun getTask(task: Task) : Task{
+    fun getTask(task: Task): Task {
         return taskList.get(task.id)
     }
 }

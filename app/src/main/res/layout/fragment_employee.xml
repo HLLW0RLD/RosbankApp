@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +10,6 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
@@ -27,7 +22,6 @@
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_gravity="top"
         android:layout_height="2dp"
         android:layout_margin="@dimen/default_margin"
         android:background="@color/toolbar_color"
@@ -43,10 +37,9 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@android:drawable/arrow_down_float"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line"/>
+        app:layout_constraintTop_toBottomOf="@id/line"/>
 
     <TextView
         android:id="@+id/task"
@@ -58,7 +51,6 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@android:drawable/arrow_down_float"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"/>
@@ -73,10 +65,9 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@android:drawable/arrow_down_float"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"/>
+        app:layout_constraintTop_toBottomOf="@+id/task"/>
 
     <TextView
         android:id="@+id/ending"
@@ -88,35 +79,36 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@android:drawable/arrow_down_float"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"/>
+        app:layout_constraintTop_toBottomOf="@+id/beginning"/>
 
     <EditText
         android:id="@+id/hours"
-        android:hint="Затраченные часы"
-        android:textColorHint="@color/text_color"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_gravity="top"
-        android:layout_margin="@dimen/default_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@android:drawable/arrow_down_float"
+        android:layout_gravity="top"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_marginTop="16dp"
+        android:hint="Затраченные часы"
+        android:textColor="@color/black"
+        android:textColorHint="@color/text_color"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"/>
+        app:layout_constraintTop_toBottomOf="@+id/ending" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_card"
-        android:layout_width="286dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/default_margin"
         android:backgroundTint="@color/toolbar_color"
-        android:src="@drawable/ic_baseline_add_24" />
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </LinearLayout>
-</androidx.core.widget.NestedScrollView>

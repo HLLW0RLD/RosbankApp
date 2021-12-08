@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.rosbankapp.model.Task
 import com.example.rosbankapp.model.repository.TaskRepository
 
-class TaskViewModel(private val repository : TaskRepository) : ViewModel() {
+class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
 
     private val taskLiveData = MutableLiveData<Task>()
 
@@ -15,13 +15,13 @@ class TaskViewModel(private val repository : TaskRepository) : ViewModel() {
 
     fun getListLiveData() = tasksLiveData
 
-    fun getTask(task: Task){
+    fun getTask(task: Task) {
         val result = repository.getTask(task)
 
         taskLiveData.value = result
     }
 
-    fun getTasks(){
+    fun getTasks() {
         val result = repository.getTasks()
 
         tasksLiveData.value = result

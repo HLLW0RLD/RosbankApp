@@ -45,11 +45,7 @@ class EmployeeFragment : Fragment() {
         fun newInstance() = EmployeeFragment()
     }
 
-    val viewModelEmployee: EmployeeViewModel by activityViewModels {
-        EmployeeViewModelFactory(
-            EmployeeRepository()
-        )
-    }
+    val viewModelEmployee: EmployeeViewModel by activityViewModels { EmployeeViewModelFactory(EmployeeRepository()) }
 
     val viewModelTask: TaskViewModel by activityViewModels { TaskViewModelFactory(TaskRepository()) }
 
@@ -101,20 +97,45 @@ class EmployeeFragment : Fragment() {
                 .commit()
         }
 
+        beginning.setOnClickListener {
+            val dpd = DatePickerDialog(
+                requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                    beginning.text = "" + day + "/" + month + "/" + year
+                }, year, month, day
+            )
+            dpd.show()
+        }
+
+        ending.setOnClickListener {
+            val dpd = DatePickerDialog(
+                requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                    ending.text = "" + day + "/" + month + "/" + year
+                }, year, month, day
+            )
+            dpd.show()
+        }
+
         add_card.setOnClickListener {
 
-            val newId = cards.size + 1
+            if (name.text.toString().isEmpty() || task.text.toString().isEmpty()
+                || beginning.text.toString().isEmpty()
+                || ending.text.toString().isEmpty() || hours.text.toString().isEmpty()
+            ) {
+                Toast.makeText(requireContext(), "Вы не заполнили все поля", Toast.LENGTH_SHORT)
+                    .show()
 
-            val card = Card(
-                newId,
-                name.text.toString(),
-                task.text.toString(),
-                beginning.text.toString(),
-                ending.text.toString(),
-                hours.text.toString()
-            )
+            } else {
 
-            if (name != null || task != null || beginning != null  || ending != null || hours != null) {
+                val newId = cards.size + 1
+
+                val card = Card(
+                    newId,
+                    name.text.toString(),
+                    task.text.toString(),
+                    beginning.text.toString(),
+                    ending.text.toString(),
+                    hours.text.toString()
+                )
 
                 val bundle = Bundle()
                 bundle.putParcelable(CARD_BUNDLE, card)
@@ -123,27 +144,9 @@ class EmployeeFragment : Fragment() {
                     .replace(R.id.container, ListFragment.newInstance(bundle))
                     .addToBackStack(ListFragment.toString())
                     .commit()
-            } else {
-                Toast.makeText(requireContext(), "Вы не заполнили все поля", Toast.LENGTH_SHORT)
-                    .show()
             }
         }
 
-        beginning.setOnClickListener {
-            val dpd = DatePickerDialog(
-                requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, day ->
-                    beginning.text = "" + day + "/" + month + "/" + year
-                }, year, month, day)
-            dpd.show()
-        }
-
-        ending.setOnClickListener {
-            val dpd = DatePickerDialog(
-                requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, day ->
-                    ending.text = "" + day + "/" + month + "/" + year
-                }, year, month, day)
-            dpd.show()
-        }
     }
 
 

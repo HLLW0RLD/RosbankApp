@@ -5,23 +5,22 @@ import androidx.lifecycle.ViewModel
 import com.example.rosbankapp.model.Card
 import com.example.rosbankapp.model.repository.CardRepository
 
-class CardViewModel(private val repository : CardRepository) : ViewModel() {
+class CardViewModel(private val repository: CardRepository) : ViewModel() {
 
-    private val cardsLiveData = MutableLiveData<MutableList<Card>>()
+    private val cardsLiveData : MutableLiveData<MutableList<Card>> = MutableLiveData()
 
-    private val cardLiveData = MutableLiveData<Card>()
+    fun getLiveData() = cardsLiveData
 
-    fun getLiveData() = cardLiveData
-
-    fun getListLiveData() = cardsLiveData
-
-    fun getCard(card: Card){
-        val result = repository.getCard(card.id)
-
-        cardLiveData.value = result
+    fun addCard(card: Card){
+        cardsLiveData.value?.add(card)
     }
 
-    fun getCards(){
+    fun getCard(card: Card) {
+        repository.getCard(card.id)
+
+    }
+
+    fun getCards() {
         val result = repository.getCards()
 
         cardsLiveData.value = result

@@ -6,6 +6,6 @@ import java.util.*
 
 @Parcelize
 data class Employee(
-    val id : Int,
-    val name : String,
-    ) : Parcelable
+    val id: Int,
+    val name: String,
+) : Parcelable

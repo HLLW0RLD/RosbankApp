@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.rosbankapp.model.Employee
 import com.example.rosbankapp.model.repository.EmployeeRepository
 
-class EmployeeViewModel(private val repository : EmployeeRepository) : ViewModel() {
+class EmployeeViewModel(private val repository: EmployeeRepository) : ViewModel() {
 
     private val employeeLiveData = MutableLiveData<Employee>()
 
@@ -13,13 +13,13 @@ class EmployeeViewModel(private val repository : EmployeeRepository) : ViewModel
 
     fun getLiveData() = employeeLiveData
 
-    fun getEmployee(employee: Employee){
+    fun getEmployee(employee: Employee) {
         val result = repository.getEmployee(employee.id)
 
         employeeLiveData.value = result
     }
 
-    fun getEmployees(){
+    fun getEmployees() {
         val result = repository.getEmployees()
 
         employeesLiveData.value = result

@@ -11,7 +11,7 @@ import com.example.rosbankapp.view.search.NameSearchFragment
 
 class NameAdapter : RecyclerView.Adapter<NameAdapter.MainViewHolder>() {
 
-    private var nameList : List<Employee> = listOf()
+    private var nameList: List<Employee> = listOf()
 
     private var clickedName: NameSearchFragment.onNameClick? = null
 
@@ -19,21 +19,21 @@ class NameAdapter : RecyclerView.Adapter<NameAdapter.MainViewHolder>() {
         this.clickedName = click
     }
 
-    inner class MainViewHolder(itemView: View)
-        : RecyclerView.ViewHolder(itemView) {
+    inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var name = itemView.findViewById<TextView>(R.id.card_name)
 
-            fun bind(employer: Employee){
+        fun bind(employer: Employee) {
 
-                name.text = employer.name
+            name.text = employer.name
 
-                itemView.setOnClickListener { clickedName?.onNameClick(employer) }
-            }
+            itemView.setOnClickListener { clickedName?.onNameClick(employer) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val itemView : View = LayoutInflater.from(parent.context).inflate(R.layout.item_name, parent, false)
+        val itemView: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_name, parent, false)
         return MainViewHolder(itemView)
     }
 
@@ -45,7 +45,7 @@ class NameAdapter : RecyclerView.Adapter<NameAdapter.MainViewHolder>() {
         return nameList.size
     }
 
-    fun filterList(filteredList : MutableList<Employee>){
+    fun filterList(filteredList: MutableList<Employee>) {
         nameList = filteredList
         notifyDataSetChanged()
     }
