@@ -1,6 +1,5 @@
 package com.example.rosbankapp.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +29,7 @@ class ListFragment : Fragment() {
 
     }
 
-    val viewModel: CardViewModel by activityViewModels { CardViewModelFactory(CardRepository()) }
+    val viewModel: CardViewModel by activityViewModels { CardViewModelFactory(CardRepository) }
 
     val adapter = ListAdapter()
 

@@ -8,6 +8,6 @@ import com.example.rosbankapp.viewmodel.CardViewModel
 class CardViewModelFactory(private val repository: CardRepository): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return CardViewModel(repository) as T
+        return CardViewModel() as T
     }
 }

@@ -16,6 +16,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MainViewHolder>() {
 
     fun setData(cards: MutableList<Card>) {
         this.cardList = cards
+
         notifyDataSetChanged()
     }
 

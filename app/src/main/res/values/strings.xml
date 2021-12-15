@@ -5,4 +5,7 @@
     <string name="main_title">Информация о текущей задаче</string>
     <string name="search">Поиск...</string>
     <string name="search_title">Введите имя</string>
+    <string name="beginning">C:</string>
+    <string name="ending">По:</string>
+    <string name="spent_time">Потрачено часов:</string>
 </resources>
