@@ -7,7 +7,7 @@ object CardRepository {
     var cardList: MutableList<Card> = mutableListOf()
 
     fun add(card : Card){
-        cardList.add(card)
+        cardList.add(0, card)
     }
 
     fun getCard(id: Int) : Card{
