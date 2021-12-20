@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="@dimen/card_height"
     android:layout_margin="@dimen/default_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +45,7 @@
             app:layout_constraintTop_toBottomOf="@id/line"/>
 
         <TextView
-            android:id="@+id/first"
+            android:id="@+id/since"
             android:text="@string/beginning"
             android:layout_width="@dimen/beginning_margin"
             android:layout_height="wrap_content"
@@ -62,10 +62,10 @@
             android:layout_margin="@dimen/default_margin"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/card_task"
-            app:layout_constraintStart_toEndOf="@id/first"/>
+            app:layout_constraintStart_toEndOf="@id/since"/>
 
         <TextView
-            android:id="@+id/last"
+            android:id="@+id/by"
             android:text="@string/ending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@id/last"
+            app:layout_constraintStart_toEndOf="@id/by"
             app:layout_constraintTop_toBottomOf="@+id/beginning"/>
 
         <TextView

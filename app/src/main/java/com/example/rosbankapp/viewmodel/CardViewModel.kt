@@ -14,7 +14,7 @@ class CardViewModel : ViewModel() {
     fun addCard(card: Card){
         CardRepository.add(card)
 
-        cardsLiveData.value?.add(card)
+        //cardsLiveData.value?.add(card)
     }
 
     fun getCards() {
