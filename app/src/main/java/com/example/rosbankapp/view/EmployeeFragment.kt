@@ -9,30 +9,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.rosbankapp.R
 import com.example.rosbankapp.model.Card
-import com.example.rosbankapp.model.Employee
-import com.example.rosbankapp.model.Task
-import com.example.rosbankapp.model.repository.EmployeeRepository
-import com.example.rosbankapp.model.repository.TaskRepository
-import com.example.rosbankapp.view.adapter.ListAdapter
-import com.example.rosbankapp.view.search.NameSearchFragment
-import com.example.rosbankapp.view.search.TaskSearchFragment
-import com.example.rosbankapp.viewmodel.EmployeeViewModel
-import com.example.rosbankapp.viewmodel.TaskViewModel
-import com.example.rosbankapp.viewmodel.factory.EmployeeViewModelFactory
-import com.example.rosbankapp.viewmodel.factory.TaskViewModelFactory
 import kotlinx.android.synthetic.main.fragment_employee.*
 import java.util.*
 
 class EmployeeFragment : Fragment() {
 
     companion object {
-
-        const val NAME_BUNDLE = "NAME_BUNDLE"
-
-        const val TASK_BUNDLE = "TASK_BUNDLE"
 
         const val CARD_BUNDLE = "CARD_BUNDLE"
 
@@ -44,10 +28,6 @@ class EmployeeFragment : Fragment() {
 
         fun newInstance() = EmployeeFragment()
     }
-
-    val viewModelEmployee: EmployeeViewModel by activityViewModels { EmployeeViewModelFactory(EmployeeRepository()) }
-
-    val viewModelTask: TaskViewModel by activityViewModels { TaskViewModelFactory(TaskRepository()) }
 
     var cards: MutableList<Card> = mutableListOf()
 
@@ -70,32 +50,6 @@ class EmployeeFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        arguments?.getParcelable<Employee>("NAME_BUNDLE")?.let { viewModelEmployee.getEmployee(it) }
-
-        arguments?.getParcelable<Task>("TASK_BUNDLE")?.let { viewModelTask.getTask(it) }
-
-        viewModelEmployee.getLiveData().observe(viewLifecycleOwner, { showNameInfo(it) })
-
-        viewModelTask.getLiveData().observe(viewLifecycleOwner, { showTaskInfo(it) })
-
-        name.setOnClickListener {
-
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, NameSearchFragment.newInstance())
-                .addToBackStack(NameSearchFragment.toString())
-                .commit()
-        }
-
-        task.setOnClickListener {
-
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, TaskSearchFragment.newInstance())
-                .addToBackStack(TaskSearchFragment.toString())
-                .commit()
-        }
 
         beginning.setOnClickListener {
             val dpd = DatePickerDialog(
@@ -147,16 +101,5 @@ class EmployeeFragment : Fragment() {
             }
         }
 
-    }
-
-
-    fun showNameInfo(employer: Employee) {
-
-        name.text = employer.name
-    }
-
-    fun showTaskInfo(nameTask: Task) {
-
-        task.text = nameTask.nameTask
     }
 }

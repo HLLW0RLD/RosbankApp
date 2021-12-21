@@ -7,8 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rosbankapp.R
 import com.example.rosbankapp.model.Card
-import com.example.rosbankapp.model.Task
-import com.example.rosbankapp.view.EmployeeFragment
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MainViewHolder>() {
 

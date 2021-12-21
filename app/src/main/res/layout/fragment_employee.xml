@@ -27,7 +27,7 @@
         android:background="@color/toolbar_color"
         app:layout_constraintTop_toBottomOf="@id/title"/>
 
-    <TextView
+    <EditText
         android:id="@+id/name"
         android:hint="Имя работника"
         android:textColor="@color/black"
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line"/>
 
-    <TextView
+    <EditText
         android:id="@+id/task"
         android:hint="Название договора"
         android:textColorHint="@color/text_color"

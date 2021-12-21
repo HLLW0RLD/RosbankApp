@@ -2,8 +2,11 @@ package com.example.rosbankapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.rosbankapp.model.Callback
 import com.example.rosbankapp.model.Card
 import com.example.rosbankapp.model.repository.CardRepository
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class CardViewModel : ViewModel() {
 
@@ -14,12 +17,9 @@ class CardViewModel : ViewModel() {
     fun addCard(card: Card){
         CardRepository.add(card)
 
-        //cardsLiveData.value?.add(card)
     }
 
     fun getCards() {
-        val result = CardRepository.getCards()
-
-        cardsLiveData.value = result
+        CardRepository.getCards(cardsLiveData)
     }
 }
