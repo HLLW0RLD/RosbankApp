@@ -2,6 +2,7 @@ package com.example.rosbankapp.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import java.lang.reflect.Constructor
 
 @Parcelize
 data class Card(
@@ -11,4 +12,6 @@ data class Card(
     val beginning: String,
     val ending: String,
     val hours: String
-) : Parcelable
+) : Parcelable {
+    constructor() : this(1, "", "", "", "", "")
+}

@@ -27,12 +27,13 @@ object CardRepository {
 
     private val database =
         FirebaseDatabase.getInstance("https://rosbankapp-72915-default-rtdb.europe-west1.firebasedatabase.app")
-    private val cardReference = database.getReference("card")
+    private val cardReference = database.getReference("card").push()
 
     var cardList: MutableList<Card> = mutableListOf()
 
-    fun add(card: Card) {
-
+    fun add(card: Card, liveData: MutableLiveData<MutableList<Card>>) {
+        val newCard = Card(card.id, card.employee, card.task, card.beginning, card.ending, card.hours)
+        cardReference.child(card.id.toString()).setValue(newCard)
     }
 
     fun getCards(liveData: MutableLiveData<MutableList<Card>>) {
@@ -40,9 +41,7 @@ object CardRepository {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val card: MutableList<Card> = snapshot.children.map { dataSnapshot ->
-                        dataSnapshot.getValue(Card::class.java)!!
-                    } as MutableList<Card>
-
+                        dataSnapshot.getValue(Card::class.java)} as MutableList<Card>
                     liveData.postValue(card)
                 }
 
