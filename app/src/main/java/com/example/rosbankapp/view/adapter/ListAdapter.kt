@@ -14,17 +14,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MainViewHolder>() {
 
     fun setData(cards: MutableList<Card>) {
         this.cardList = cards
-
         notifyDataSetChanged()
     }
 
     fun add(addedCard: Card) {
         this.cardList.add(addedCard)
-        if(this.cardList.size == 1){
-            notifyDataSetChanged()
-        }else{
-            notifyItemInserted(0)
-        }
+        notifyItemInserted(0)
     }
 
     inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

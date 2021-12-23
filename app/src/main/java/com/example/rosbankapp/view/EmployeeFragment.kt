@@ -80,7 +80,7 @@ class EmployeeFragment : Fragment() {
 
             } else {
 
-                val newId = cards.size + 1
+                val newId = UUID.randomUUID().toString()
 
                 val card = Card(
                     newId,

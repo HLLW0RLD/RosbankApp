@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 object CardRepository {
 
@@ -27,24 +28,27 @@ object CardRepository {
 
     private val database =
         FirebaseDatabase.getInstance("https://rosbankapp-72915-default-rtdb.europe-west1.firebasedatabase.app")
-    private val cardReference = database.getReference("card").push()
+    private val cardReference = database.getReference("card")
 
     var cardList: MutableList<Card> = mutableListOf()
 
-    fun add(card: Card, liveData: MutableLiveData<MutableList<Card>>) {
-        val newCard = Card(card.id, card.employee, card.task, card.beginning, card.ending, card.hours)
-        cardReference.child(card.id.toString()).setValue(newCard)
+    fun add(card: Card) {
+        val newId = UUID.randomUUID().toString()
+
+        val newCard = Card(newId, card.employee, card.task, card.beginning, card.ending, card.hours)
+        cardReference.child(UUID.randomUUID().toString()).setValue(newCard)
+        cardList.add(0, newCard)
     }
 
     fun getCards(liveData: MutableLiveData<MutableList<Card>>) {
         cardReference
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val card: MutableList<Card> = snapshot.children.map { dataSnapshot ->
+                    val cards: MutableList<Card> = snapshot.children.map { dataSnapshot ->
                         dataSnapshot.getValue(Card::class.java)} as MutableList<Card>
-                    liveData.postValue(card)
+                    liveData.postValue(cards)
+                    cardList = cards
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     // Nothing to do
                 }
